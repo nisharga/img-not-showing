@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Am i</title>
+    <style>
+        span#email {color: red;}
+        span#name {color: red;}
+        #photo{        
+        height: 300px;
+        width: 300px;
+        background-size: cover;
+        background-position: center;
+        background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Name: <span id="name"></span></h1> <br>
+    <h1>Email: <span id="email"></span></h1>
+    Photo: <div id="photo"></div>
+    
+    <!-- document.getElementById('email').innerText = data.results[0].email -->
+    <script>
+        fetch('https://randomuser.me/api')
+        .then(res => res.json())
+        .then(data => {
+            const fullName = `${data.results[0].name.title} ${data.results[0].name.first} ${data.results[0].name.last}`;
+            document.getElementById('name').innerText = fullName
+            document.getElementById('email').innerText = data.results[0].email
+            var photoLink = data.results[0].picture.large;
+           
+            document.getElementById('photo').innerText = photoLink;
+            document.getElementById('photo').style.backgroundImage = 
+            "url(photoLink)"; 
+            
+            
+        })
+       
+    </script>
+</body>
+</html>
